@@ -87,10 +87,17 @@ summary(modFit3)
 
 We can conclude that `am`(transmission type) has significant influence on `mpg` but 'wt'(weight) and `qsec`(1/4 mile time) also influence `mpg`.
 
-
+Below are the residual plots to see the fit of data. 
 ```{r}
-coef(modFit3)
+plot(density(resid(modFit3 ))) #A density plot
+qqnorm(resid(modFit3 )) # A quantile normal plot - good for checking normality
+qqline(resid(modFit3 ))
 ```
+
+
+
+
+
 
 * Is an automatic or manual transmission better for MPG
 Manual transmission is better for MPG
