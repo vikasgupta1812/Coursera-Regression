@@ -1,0 +1,100 @@
+---
+title: "CARS Analysis"
+output: pdf_document
+---
+This analysis is done to explore a dataset of collection of cars. The main aim is to explore the relationship between a set of variables and miles per galllon. The two questions which needs to be answered are:- 
+
+1- Is an automatic or manual transmission better for MPG. 
+2- Quantify the MPG difference between automatic and manual transmissions. 
+
+
+## Executive summary 
+During this analysis it was found that the transmission type(automatic/ manual) has sugnificant effect on the miles per gallong (mpg) of the vehicle. In addition to transmission, two other variables, weight and qsec has impact on the mpg as well. Keeping other variables constant, Manual transmission is approx. `9.62` mpg more than automatic transmission. 
+
+
+
+##Analysis
+```{r}
+library(ggplot2)
+```
+
+
+
+load the data.
+```{r}
+data(mtcars)
+attach(mtcars)
+```
+
+convert automatic variable to logical type
+```{r}
+mtcars$am  <- as.logical(mtcars$am)
+
+```
+
+summarise automatic and maual cars in the dataset. 
+```{r}
+summary(mtcars$am)
+
+```
+There is no missing value. 
+
+check the summary of mpg variable. 
+```{r}
+summary(mtcars$mpg)
+qplot(mtcars$mpg,binwidth=2)
+```
+
+plot boxplot of mpg against the automatic/ manual transmission
+```{r}
+p  <- ggplot(mtcars, aes(am, mpg))
+p + geom_boxplot()
+```
+
+generate the base model with linear regression between mpg and automatic transmission
+
+
+```{r}
+modFitbase  <- lm(mpg ~ am, data = mtcars)
+summary(modFitbase)
+```
+
+plot a graph between residual and mpg to see if these two are correlated. 
+```{r}
+qplot(modFitbase$residuals, mtcars$mpg)
+```
+
+The correlation seems to be significant. So Find the correlation between residual and output mpg
+```{r}
+cor(modFitbase$residuals, mtcars$mpg)
+```
+
+This correlation is significant. we are missing some other important variables in our model. 
+
+```{r}
+modFitall  <- lm(mpg ~ ., data= mtcars)
+summary(modFitall)
+```
+
+By looking at `Pr(>|t|)` value for each variables, we see that `wt`, `am` and `qsec` are three significant variables. 
+
+
+
+```{r}
+modFit3  <- lm(mpg ~ wt+qsec+am-1, mtcars)
+summary(modFit3)
+```
+
+We can conclude that `am`(transmission type) has significant influence on `mpg` but 'wt'(weight) and `qsec`(1/4 mile time) also influence `mpg`.
+
+
+```{r}
+coef(modFit3)
+```
+
+* Is an automatic or manual transmission better for MPG
+Manual transmission is better for MPG
+
+* Quantify the MPG difference between automatic and manual transmissions"
+Having the manual transmissions would be `r coef(modFit3)[3]` mpg more effeciant than those having automatic transmissions on MPG, if the cars having same condition on all other features, particularly, the weight and quarter mile time. 
+
