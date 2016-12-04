@@ -1,11 +1,12 @@
 ---
-title: "CARS Analysis"
+title: CARS Analysis
 output: pdf_document
+published: true
 ---
 This analysis is done to explore a dataset of collection of cars. The main aim is to explore the relationship between a set of variables and miles per galllon. The two questions which needs to be answered are:- 
 
-1- Is an automatic or manual transmission better for MPG. 
-2- Quantify the MPG difference between automatic and manual transmissions. 
+1. Is an automatic or manual transmission better for MPG. 
+2. Quantify the MPG difference between automatic and manual transmissions. 
 
 
 ## Executive summary 
@@ -103,5 +104,4 @@ qqline(resid(modFit3 ))
 Manual transmission is better for MPG
 
 * Quantify the MPG difference between automatic and manual transmissions"
-Having the manual transmissions would be `r coef(modFit3)[3]` mpg more effeciant than those having automatic transmissions on MPG, if the cars having same condition on all other features, particularly, the weight and quarter mile time. 
-
+Having the manual transmissions would be `r coef(modFit3)[3]` mpg more effeciant than those having automatic transmissions on MPG, if the cars having same condition on all other features, particularly, the weight and quarter mile time.
