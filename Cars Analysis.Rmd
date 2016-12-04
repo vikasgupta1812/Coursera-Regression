@@ -10,7 +10,7 @@ This analysis is done to explore a dataset of collection of cars. The main aim i
 
 
 ## Executive summary 
-During this analysis it was found that the transmission type(automatic/ manual) has sugnificant effect on the miles per gallong (mpg) of the vehicle. In addition to transmission, two other variables, weight and qsec has impact on the mpg as well. Keeping other variables constant, Manual transmission is approx. `9.62` mpg more than automatic transmission. 
+During this analysis it was found that the transmission type (automatic/ manual) has significant effect on the miles per gallong (mpg) of the vehicle. In addition to transmission, two other variables - `weight` and `qsec` have impact on the `mpg` as well. Keeping other variables constant, Manual transmission is approx. `9.62` mpg more than automatic transmission. 
 
 
 
